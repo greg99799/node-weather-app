@@ -13,9 +13,6 @@ function printError(error){
   console.error("We have a problem: " + error.message);
 }
 
-// function provideZipCode(zipCode){
-
-// }
 
 
 function getZipCode (city, state) {
