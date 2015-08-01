@@ -31,7 +31,7 @@ function get(zipCode) {
             //gather all data values
             var values = {
               title: parsedBody.query.results.channel.item.title,
-              temp: parsedBody.query.results.channel.item.condition.temp
+              temp: parsedBody.query.results.channel.item.condition.temp,
             };
             // console.log(values.query.results.channel.item.title.condition.temp);
 
@@ -40,7 +40,7 @@ function get(zipCode) {
             printMessage(values.title, values.temp);
           } catch (error) {
               //Parse Error
-              printError({message: "parsing error"});
+              printError({message: "There was an error in getting location " + zipCode + ". Zip code does not exist."});
             }  
         } else {
             //Status Code error
