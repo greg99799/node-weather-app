@@ -1,12 +1,12 @@
 
 var weather = require("./weather")
 
-// var city = process.argv.slice(2);
+var city = process.argv.slice(2);
+console.log(process);
+city.forEach(weather.getZipCode);
 
-// city.forEach(weather.get);
+// weather.getZipCode("owatonna", "mn");
 
-var myZip = weather.getZipCode("sarasota", "fl");
-console.log(myZip);
 // weather.get(myZip)
 
 
