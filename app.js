@@ -1,4 +1,8 @@
 
 var weather = require("./weather")
 
-weather.get(34239);
+var zips = process.argv.slice(2);
+
+zips.forEach(weather.get);
+
+

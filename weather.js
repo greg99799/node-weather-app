@@ -3,7 +3,7 @@ var http = require("http");
 
 //Print out message
 function printMessage(title, temp) {
-  var message = title + ":" + 
+  var message = title + " ------------- " + temp + " degrees.";
   console.log(message);
 }
 
@@ -14,7 +14,7 @@ function printError(error){
 
 
 function get(zipCode) {
-  //Connect to API URL (http://teamtreehouse.com/username.json)
+  //Connect to API URL 
       var request = http.get('http://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20location%3D%22' + zipCode + '%22&format=json', function(response){
       var body = "";
 
@@ -29,17 +29,15 @@ function get(zipCode) {
             //Parse the data
             var parsedBody = JSON.parse(body); 
             //gather all data values
-            console.log(parsedBody.query.results.channel.item.condition.temp);
             var values = {
               title: parsedBody.query.results.channel.item.title,
               temp: parsedBody.query.results.channel.item.condition.temp
             };
             // console.log(values.query.results.channel.item.title.condition.temp);
-            console.log(values.title);
 
             // console.log(values.query.results.channel.item.title);
             //Print the data
-            // printMessage(values.title, values.temp);
+            printMessage(values.title, values.temp);
           } catch (error) {
               //Parse Error
               printError({message: "parsing error"});
