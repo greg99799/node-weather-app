@@ -15,33 +15,47 @@ function printError(error){
   console.error("We have a problem: " + error.message);
 }
 
-// function getZipCode (city, state) {
-//   //connect to city to zip api
-//   var apiKey = "aS5FtNNINJW3b9KRh18Cfxa8uudxDp7OidtL0huO0qRbAC2SEbuTJF2d9gKMFSAX"
-//   var request = https.get("https://www.zipcodeapi.com/rest/" + apiKey + "/city-zips." + "json" + "/" + city + "/" + state, function(response){
-//     var body = ""  
-//   //read data
-//     response.on("data", function(chunk){
-//       body += chunk;
-//       var parsedBody = JSON.parse(body);
-//       // console.log(parsedBody);
-//       zipCode = parsedBody.zip_codes[0];
-//       // return zipCode;
-//       // console.log(zipCode);   
-//       get(zipCode);
-//     });
-//   });
-// }
+function getZipCode (city, state) {
+  //connect to city to zip api
+  var apiKey = "aS5FtNNINJW3b9KRh18Cfxa8uudxDp7OidtL0huO0qRbAC2SEbuTJF2d9gKMFSAX"
+  var request = https.get("https://www.zipcodeapi.com/rest/" + apiKey + "/city-zips." + "json" + "/" + city + "/" + state, function(response){
+    var body = ""  
+  //read data
+    response.on("data", function(chunk){
+      body += chunk;
+    });
+    response.on('end', function(){
+      if (response.statusCode === 200) {
+        try {
+          //Parse the data
+          var parsedBody = JSON.parse(body); 
+          //gather all data values
+          var usedZip = parsedBody.zip_codes[0];
+          console.log(usedZip);
+          return usedZip;
+
+        } catch (error) {
+            //Parse Error
+            printError({message: "There was an error in getting location: " + city});
+          }  
+      } else {
+          //Status Code error
+          printError({message: "File not found"});
+      }
+    });
+  });
+}
 
 function get(zipCode) {
   //Connect to API URL 
     var request = http.get('http://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20location%3D%22' + zipCode + '%22&format=json', function(response){
     var body = "";
+    console.log(request.path);
 
     //Read the data
     response.on('data', function(chunk){
       body += chunk;
-      // console.log(body);
+          // console.log(body);
     });
     response.on('end', function(){
       if (response.statusCode === 200) {
@@ -73,4 +87,23 @@ function get(zipCode) {
 } 
   
 
-module.exports.get = getZipCode;
+module.exports.getZipCode = getZipCode;
+module.exports.get = get;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

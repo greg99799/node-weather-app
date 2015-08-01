@@ -5,6 +5,9 @@ var weather = require("./weather")
 
 // city.forEach(weather.get);
 
-weather.get("sarasota", "fl")
+var myZip = weather.getZipCode("sarasota", "fl");
+console.log(myZip);
+// weather.get(myZip)
+
 
 
