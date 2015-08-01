@@ -15,12 +15,13 @@ function printError(error){
 
 
 
-function getZipCode (city, state) {
-  //connect to city to zip api
+function getZipCode (array) {
+  //connect to 'city to zip' API
   var apiKey = "aS5FtNNINJW3b9KRh18Cfxa8uudxDp7OidtL0huO0qRbAC2SEbuTJF2d9gKMFSAX"
-  var request = https.get("https://www.zipcodeapi.com/rest/" + apiKey + "/city-zips." + "json" + "/" + city + "/" + state, function(response){
+  var request = https.get("https://www.zipcodeapi.com/rest/" + apiKey + "/city-zips." + "json" + "/" + array + "/" + array, function(response){
     var body = ""  
-  //read data
+    console.log(array);
+      //read data
     response.on("data", function(chunk){
       body += chunk;
     });
@@ -42,7 +43,6 @@ function getZipCode (city, state) {
           //Status Code error
           printError({message: "File not found"});
       }
-      // test();
     });
   });
 }
