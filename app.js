@@ -1,8 +1,10 @@
 
 var weather = require("./weather")
 
-var zips = process.argv.slice(2);
+// var city = process.argv.slice(2);
 
-zips.forEach(weather.get);
+// city.forEach(weather.get);
+
+weather.get("sarasota", "fl")
 
 
